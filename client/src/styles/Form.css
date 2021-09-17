@@ -1,0 +1,27 @@
+input {
+    padding: 10px 30px;
+    margin: 8px 0;
+    display: inline-block;
+
+    width: 1px;
+    font-size: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+    background-image: url('../images/485-4851736_free-png-search-icon-search-icon-free-download.png');
+    background-repeat: no-repeat;
+    background-position: 4px center;
+    background-size: 20px;
+
+    outline: none;
+
+    transition: all .5s;
+}
+
+input:focus {
+    background-color: #d2e8fc;
+    width: 100%;    
+}
+
+
+

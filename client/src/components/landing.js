@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/Landing.css';
+import s from '../styles/Landing.css';
 
 // Link to
 import { Link } from "react-router-dom";
@@ -9,9 +9,11 @@ import dog from '../images/dog.png';
 
 export default function Landing () {
     return (
-        <div>
+        <div className='landGen'>
             <Link to='/home'>
-                <img src={dog} />
+                <div className="land">
+                    <img src={dog} />
+                </div>
             </Link>
         </div>
     );
