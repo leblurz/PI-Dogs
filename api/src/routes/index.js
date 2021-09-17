@@ -3,6 +3,10 @@ const { Router } = require('express');
 // Ejemplo: const authRouter = require('./auth.js');
 
 
+// Routers
+const tempsRouter = require('./temps');
+
+
 const router = Router();
 
 // Configurar los routers
