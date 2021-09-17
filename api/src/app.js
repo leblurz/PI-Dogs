@@ -1,17 +1,25 @@
 const express = require('express');
+//const { json } = require ('express');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-const routes = require('./routes/index.js');
+
+// Routes
+const raceRoutes = require('./routes/races.js');
+const tempRoutes = require('./routes/temperamentos.js');
 
 require('./db.js');
 
+// Init
 const server = express();
 
 server.name = 'API';
 
 // API KEY 7308aa06-9869-43e5-844c-7ab7318ec8a8
 
+// Middlewares
+// server.use(express.urlencoded({ extended: true, limit: '50mb' }));
+//server.use(express.json({ limit: '50mb' }));
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 server.use(bodyParser.json({ limit: '50mb' }));
 server.use(cookieParser());
@@ -24,7 +32,9 @@ server.use((req, res, next) => {
   next();
 });
 
-server.use('/', routes);
+// Routes
+server.use('/races', raceRoutes);
+server.use('/temps', tempRoutes);
 
 // Error catching endware.
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
