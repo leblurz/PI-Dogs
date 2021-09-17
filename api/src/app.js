@@ -5,12 +5,10 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 
 // Routes
-const raceRoutes = require('./routes/races.js');
-const tempRoutes = require('./routes/temperamentos.js');
+const routes = require('./routes/index.js');
 
 require('./db.js');
 
-// Init
 const server = express();
 
 server.name = 'API';
@@ -32,9 +30,7 @@ server.use((req, res, next) => {
   next();
 });
 
-// Routes
-server.use('/races', raceRoutes);
-server.use('/temps', tempRoutes);
+server.use('/', routes);
 
 // Error catching endware.
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
