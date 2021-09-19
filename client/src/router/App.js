@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 // Components
 import Landing from '../components/landing.js';
 import Home from '../components/home';
-import Race from '../components/race';
+import Breed from '../components/breed';
 import Form from '../components/form'
 
 function App() {
@@ -23,8 +23,8 @@ function App() {
         <Home />
       </Route>
 
-      <Route path='/race'>
-        <Race />
+      <Route path='/breed'>
+        <Breed />
       </Route>
 
       <Route path='/form'>

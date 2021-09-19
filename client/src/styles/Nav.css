@@ -9,18 +9,19 @@ li {
     color: black;
     font-size: 25px;
     display: inline-block;
-    padding: 20px;
-    transition: all .5s;
+    padding: 20px 20px 0;
+    transition: color .5s;
 }
 
 .navigation {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 30px 10%;
+    padding: 30px;
     background-color: white;
 }
 
 li:hover{
     color: rgb(134, 159, 212);
+    border-bottom: 1px solid #B5DEFF
 }

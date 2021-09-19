@@ -13,11 +13,11 @@ export default function Home () {
     return (
         <>
             <Nav />
+            <Sort />
+            <Filter />
             <input placeholder='Raza...'/>
             {/* pasarle argumento de card */}
             <Cards />
-            <Filter />
-            <Sort />
             <div>
                 <p>
                     PAGINADO

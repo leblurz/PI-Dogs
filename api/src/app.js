@@ -1,5 +1,5 @@
 const express = require('express');
-//const { json } = require ('express');
+const { json } = require ('express');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
@@ -17,9 +17,8 @@ server.name = 'API';
 
 // Middlewares
 // server.use(express.urlencoded({ extended: true, limit: '50mb' }));
-//server.use(express.json({ limit: '50mb' }));
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
-server.use(bodyParser.json({ limit: '50mb' }));
+server.use(json({ limit: '50mb' }));
 server.use(cookieParser());
 server.use(morgan('dev'));
 server.use((req, res, next) => {
