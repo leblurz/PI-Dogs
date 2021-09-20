@@ -67,6 +67,16 @@ router.get('/dogs', async (req, res) => {
 });
 
 
+router.get(`/dogs/:id`, async (req, res) => {
+    const paras = req.params.id;
+    const idRaza = parseInt(paras)
+    const data = await apiData();
+    
+    const arr = data.filter (e => e.id === idRaza);
+    res.status(200).json(arr)
+});
+
+
 
 
 // Configurar los routers
