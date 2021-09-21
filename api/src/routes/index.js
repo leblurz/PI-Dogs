@@ -4,10 +4,10 @@ const { Router } = require('express');
 // Ejemplo: const authRouter = require('./auth.js');
 
 // Method UNIQ
-const _ = require('lodash')
+const _ = require('lodash');
 
 // DB
-const { Breed, Temperament } = require('../db')
+const { Breed, Temperament } = require('../db');
 
 // Axios
 const axios = require('axios');
@@ -19,6 +19,7 @@ const {
 
 // Routes
 const DogRouter = require('./dog');
+const { forEach } = require('lodash');
 
 const router = Router();
 
@@ -37,7 +38,7 @@ const apiData = async () => {
             vida: e.life_span.replace("years", "años"),
             Image: e.image.url,
         };
-    })
+    });
     return dataApi;
 };
 
@@ -45,85 +46,142 @@ const apiData = async () => {
 
 // }
 
-router.get('/dogs/temperament', async (req, res) => {
-    const data = await apiData();
-    const temp = [];
-    const st = [];
+router.get ('/dogs/temperament', async (req, res) => {
 
-    // Separa los strings en nuevos arreglos divididos entre las comas
-    data.map (e=> {
-        if (e.temperamento) {
-            temp.push(e.temperamento.split(','));
-        }
-    });
+    try {
 
-    // Pushea todas las palabras a un nuevo array
-    for(let i=0;i<temp.length;i++){
-        temp[i].forEach(e => {
-            st.push(e);
+        const data = await apiData();
+        const temp = [];
+        const st = [];
+
+        // Separa los strings en nuevos arreglos divididos entre las comas
+        data.map ( e => {
+            if (e.temperamento) {
+                temp.push(e.temperamento.split(','));
+            };
         });
-    };
 
-    // Filtra los repetidos
-    const uni = _.uniq(st)
+        // Pushea todas las palabras a un nuevo array
+        for(let i=0;i<temp.length;i++){
+            temp[i].forEach(e => {
+                st.push(e);
+            });
+        };
 
-    // uni.forEach ( e => {
-        
-    // });
+        // Saca los espacios al principip
+        const space = st.map(e=>e.trim())
+        // Filtra los repetidos
+        const uni = _.uniq(space);
 
-    return res.status(200).json(uni)
+        // Crea el temperamento si no existe
+        uni.forEach ( e => {
+
+            if ( e !== '') {
+                Temperament.findOrCreate ({
+                    where: {
+                        name: e
+                    }
+                });
+            };
+        });
+
+        // Los selecciona y ordena de forma ascendente 
+        const temps = await Temperament.findAll( { order:[ [ 'name','ASC' ] ] } );
+
+        return res.status(200).json(temps);
+    }
+    // Catch en caso de error
+    catch (error) {
+        return res.status(400).send('Error')
+    }
 });
+
 
 
 
 router.get(`/dogs/:id`, async (req, res) => {
     const paras = req.params.id;
 
-    // Parseado de los params
-    const idRaza = parseInt(paras)
-    const data = await apiData();
+    try {
+        // Parseado de los params
+        const idRaza = parseInt(paras);
+        const data = await apiData();
 
-    // Filtrado por id
-    const arr = data.filter (e => e.id === idRaza);
+        // Filtrado por id
+        const arr = data.filter (e => e.id === idRaza);
 
-    // Caso encontrado
-    if (arr.length > 0){
-        res.status(200).json(arr)
+        // Caso encontrado
+        if (arr.length > 0){
+            res.status(200).json(arr)
+        }
+
+        // Caso no encontrado
+        else {
+            res.status(400).send('No se encontro el perro buscado');
+        };
     }
-
-    // Caso no encontrado
-    else {
-        res.status(400).send('No se encontro el perro buscado')
-    };
+    // Caso de error
+    catch {
+        res.status(400).send('Hubieron conflictos al buscar el perro');
+    }
 });
 
 router.get('/dogs', async (req, res) => {
     const raza = req.query.name;
     const data = await apiData();
 
-    // Caso con query
-    if (raza){
+    try {
+        // Caso con query
+        if (raza){
 
-        // Filtrado de razas
-        const filt = data.filter(e => e.nombre.toLowerCase().includes(raza.toLowerCase()));
+            // Filtrado de razas
+            const filt = data.filter(e => e.nombre.toLowerCase().includes(raza.toLowerCase()));
 
-        if (filt.length > 0){
-            // En caso de matchear
-            res.status(200).json(filt)
+            if (filt.length > 0){
+                // En caso de matchear
+                res.status(200).json(filt)
+            }
+
+            else {
+                // Raza no encontrada
+                res.status(400).json('Raza no encontrada')
+            };
         }
 
+        // Caso sin query
         else {
-            // Raza no encontrada
-            res.status(400).json('Raza no encontrada')
+            res.status(200).json(data)
         };
     }
-
-    // Caso sin query
-    else {
-        res.status(200).json(data)
-    };
+    // Caso de error
+    catch{
+    res.status(400).json('Hubieron conflictos en la busqueda')
+    }
 });
 
+router.post('/dog', async (req, res) => {
+    const data = await req.body;
+
+    // De obj a array
+    data.values();
+
+    // Creacion de la columna
+    const raza = await data.forEach (e => {
+        if ( e !== '') {
+            console.log(e)
+            Breed.findOrCreate ({
+                where: {
+                    nombre: e.nombre,
+                    altura: e.altura,
+                    peso: e.peso,
+                    vida: e.vida,
+                    image: e.image
+                }
+            });
+        }
+    });
+    res.status(200).json(data)
+});
 
 
 // Configurar los routers

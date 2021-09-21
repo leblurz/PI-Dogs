@@ -13,8 +13,6 @@ const server = express();
 
 server.name = 'API';
 
-// API KEY 7308aa06-9869-43e5-844c-7ab7318ec8a8
-
 // Middlewares
 // server.use(express.urlencoded({ extended: true, limit: '50mb' }));
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));

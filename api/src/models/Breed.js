@@ -24,8 +24,12 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
     },
 
-    apiId: {
-      type: DataTypes.INTEGER,
+    idDB:{
+      type: DataTypes.UUID,
+      //A default unique universal identifier generated following the UUID v4 standard
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
+      primaryKey: true  
     }
   },
   // CreatedAt-UpdatedAt
