@@ -20,13 +20,13 @@ router.post('/', async (req, res) => {
             nombre : nombre,
             altura: altura,
             peso : peso,
-            vida : vida + "años",
+            vida : vida + ' ' + "años",
             image : image
         })
 
         const ifCreated = await Temperament.findAll({
             where: {
-                name: temperamento
+                name: temperamento.replace(/^\w/, (c) => c.toUpperCase())
         }
     })
 
@@ -37,7 +37,7 @@ router.post('/', async (req, res) => {
     else {
     // Se crea el temperamento
     const tempDB = await Temperament.create({
-            name: temperamento,
+            name: temperamento.replace(/^\w/, (c) => c.toUpperCase()),
     });
     // Se relacionan
     perro.addTemperament(tempDB);

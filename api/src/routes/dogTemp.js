@@ -15,7 +15,6 @@ const { allData } = require( '../requests/requests')
 
 router.get ('/temperament', async (req, res) => {
     try {
-
         const data = await allData();
         const temp = [];
         const st = [];
@@ -35,13 +34,12 @@ router.get ('/temperament', async (req, res) => {
         };
 
         // Saca los espacios al principip
-        const space = st.map(e=>e.trim())
+        const space = st.map(e => e.trim())
         // Filtra los repetidos
         const uni = _.uniq(space);
 
         // Crea el temperamento si no existe
         uni.forEach ( e => {
-
             if ( e !== '') {
                 Temperament.findOrCreate ({
                     where: {
@@ -56,6 +54,7 @@ router.get ('/temperament', async (req, res) => {
 
         return res.status(200).json(temps);
     }
+    
     // Catch en caso de error
     catch (error) {
         return res.status(400).send('Error')

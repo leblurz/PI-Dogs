@@ -19,21 +19,17 @@ router.get('/', async (req, res) => {
     try {
         // Caso con query
         if (raza){
-
             // Filtrado de razas
             const filt = data.filter(e => e.nombre.toLowerCase().includes(raza.toLowerCase()));
-
             if (filt.length > 0){
                 // En caso de matchear
                 res.status(200).json(filt)
             }
-
             else {
                 // Raza no encontrada
                 res.status(400).json('Raza no encontrada')
             };
         }
-
         // Caso sin query
         else {
             res.status(200).json(data)
@@ -42,7 +38,7 @@ router.get('/', async (req, res) => {
     // Caso de error
     catch{
     res.status(400).json('Hubieron conflictos en la busqueda')
-    }
+    };
 });
 
 module.exports = router;

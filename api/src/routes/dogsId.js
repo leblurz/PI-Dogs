@@ -8,42 +8,39 @@ const axios = require('axios');
 
 const router = Router();
 
-const { allData } = require( '../requests/requests')
+const { dataDB, apiData } = require( '../requests/requests')
 
 router.get('/:id', async (req, res) => {
     const paras = req.params.id;
-
     try {
         // Obteniendo data
-        const data = await allData();
-        // To String para comparar DB y Api
-        const dataStr = data.map(e=> (
-            {
-                id: e.id.toString(),
-                nombre: e.nombre,
-                altura: e.altura,
-                peso: e.peso,
-                temperamento: e.temperamento ? e.temperamento : e.temperaments,
-                vida: e.vida,
-                Image: e.Image
+        if (paras.length === 36) {
+            const DB = await dataDB();
+            const arrDB = DB.filter(e=>e.id === paras);
+            console.log(arrDB)
+            if (arrDB.length > 0){
+                return res.status(200).json(arrDB);
             }
-        ))
-
-        // Filtrado por id
-        const arr = dataStr.filter (e => e.id === paras);
-
-        // Caso encontrado
-        if (arr.length > 0){
-            res.status(200).json(arr)
+            else {
+                return res.status(400).send('Raza no encontrada');
+            };
         }
-        else{
-            res.status(400).send('Error')
-        }
+
+        else {
+            const API = await apiData();
+            const arrAPI = API.filter (e => e.id === paras);
+            if (arrAPI.length > 0){
+                return res.status(200).json(arrAPI);
+            }
+            else{
+                return res.status(400).send('Raza no encontrada');
+            };
+        };
     }
     // Caso de error
     catch {
-        res.status(400).send('Hubieron conflictos al buscar el perro');
-    }
+        res.status(400).send('Hubieron conflictos al buscar la raza solicitada');
+    };
 });
 
 module.exports = router;
