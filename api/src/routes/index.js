@@ -120,7 +120,6 @@ router.get(`/dogs/:id`, async (req, res) => {
     try {
         // Obteniendo data
         const data = await allData();
-
         // To String para comparar DB y Api
         const dataStr = data.map(e=> (
             {
@@ -128,7 +127,7 @@ router.get(`/dogs/:id`, async (req, res) => {
                 nombre: e.nombre,
                 altura: e.altura,
                 peso: e.peso,
-                temperamento: e.temperamento,
+                temperamento: e.temperamento ? e.temperamento : e.temperaments,
                 vida: e.vida,
                 Image: e.Image
             }
@@ -182,12 +181,12 @@ router.get('/dogs', async (req, res) => {
 });
 
 router.post('/dog', async (req, res) => {
-    const { nombre, altura, peso, temperament,
+    const { nombre, altura, peso, temperamento,
         vida, image } = await req.body; 
     // Creacion de la columna
     try {
         // Se crea la raza
-    const perro = await Breed.create({
+        const perro = await Breed.create({
             nombre : nombre,
             altura: altura,
             peso : peso,
@@ -195,9 +194,9 @@ router.post('/dog', async (req, res) => {
             image : image
         })
 
-    const ifCreated = await Temperament.findAll({
-        where: {
-            name: temperament
+        const ifCreated = await Temperament.findAll({
+            where: {
+                name: temperamento
         }
     })
 
@@ -208,15 +207,12 @@ router.post('/dog', async (req, res) => {
     else {
     // Se crea el temperamento
     const tempDB = await Temperament.create({
-            name: temperament,
+            name: temperamento,
     });
     // Se relacionan
     perro.addTemperament(tempDB);
     }
-
-
     res.status(200).json(perro)
-
     } 
     catch(error) {
         res.status(500).send('error')
