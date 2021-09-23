@@ -20,11 +20,11 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    image: {
+    Image: {
       type: DataTypes.STRING,
     },
 
-    idDB:{
+    id:{
       type: DataTypes.UUID,
       //A default unique universal identifier generated following the UUID v4 standard
       defaultValue: DataTypes.UUIDV4,

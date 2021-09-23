@@ -20,6 +20,7 @@ const {
 // Routes
 const DogRouter = require('./dog');
 const { forEach } = require('lodash');
+const e = require('express');
 
 const router = Router();
 
@@ -42,15 +43,29 @@ const apiData = async () => {
     return dataApi;
 };
 
-// const dbData = async () => {
+const dataDB = async () => {
+    return await Breed.findAll({
+        include: {
+            model: Temperament,
+            attributes: ['name'],
+            throught: {
+                attributes: [],
+            },
+        }
+    })
+};
 
-// }
+const allData = async () => {
+    const DB = await dataDB();
+    const Api = await apiData();
+
+    return DB.concat(Api)
+}
 
 router.get ('/dogs/temperament', async (req, res) => {
-
     try {
 
-        const data = await apiData();
+        const data = await allData();
         const temp = [];
         const st = [];
 
@@ -103,22 +118,29 @@ router.get(`/dogs/:id`, async (req, res) => {
     const paras = req.params.id;
 
     try {
-        // Parseado de los params
-        const idRaza = parseInt(paras);
-        const data = await apiData();
+        // Obteniendo data
+        const data = await allData();
+
+        // To String para comparar DB y Api
+        const dataStr = data.map(e=> (
+            {
+                id: e.id.toString(),
+                nombre: e.nombre,
+                altura: e.altura,
+                peso: e.peso,
+                temperamento: e.temperamento,
+                vida: e.vida,
+                Image: e.Image
+            }
+        ))
 
         // Filtrado por id
-        const arr = data.filter (e => e.id === idRaza);
+        const arr = dataStr.filter (e => e.id === paras);
 
         // Caso encontrado
         if (arr.length > 0){
             res.status(200).json(arr)
         }
-
-        // Caso no encontrado
-        else {
-            res.status(400).send('No se encontro el perro buscado');
-        };
     }
     // Caso de error
     catch {
@@ -128,8 +150,8 @@ router.get(`/dogs/:id`, async (req, res) => {
 
 router.get('/dogs', async (req, res) => {
     const raza = req.query.name;
-    const data = await apiData();
-
+    const data = await allData();
+    console.log(data)
     try {
         // Caso con query
         if (raza){
@@ -160,35 +182,50 @@ router.get('/dogs', async (req, res) => {
 });
 
 router.post('/dog', async (req, res) => {
-    const data = await req.body;
-
-    // De obj a array
-    data.values();
-
+    const { nombre, altura, peso, temperament,
+        vida, image } = await req.body; 
     // Creacion de la columna
-    const raza = await data.forEach (e => {
-        if ( e !== '') {
-            console.log(e)
-            Breed.findOrCreate ({
-                where: {
-                    nombre: e.nombre,
-                    altura: e.altura,
-                    peso: e.peso,
-                    vida: e.vida,
-                    image: e.image
-                }
-            });
-        }
-    });
-    res.status(200).json(data)
-});
+    try {
+        // Se crea la raza
+    const perro = await Breed.create({
+            nombre : nombre,
+            altura: altura,
+            peso : peso,
+            vida : vida + "años",
+            image : image
+        })
 
+    const ifCreated = await Temperament.findAll({
+        where: {
+            name: temperament
+        }
+    })
+
+    if(ifCreated.length > 0) {
+        perro.addTemperament(ifCreated[0].dataValues.id)
+    }
+
+    else {
+    // Se crea el temperamento
+    const tempDB = await Temperament.create({
+            name: temperament,
+    });
+    // Se relacionan
+    perro.addTemperament(tempDB);
+    }
+
+
+    res.status(200).json(perro)
+
+    } 
+    catch(error) {
+        res.status(500).send('error')
+    };
+});
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
 // router.use('/dogs', DogRouter)
-
-
 
 module.exports = router;
