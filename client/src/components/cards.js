@@ -1,12 +1,12 @@
 import React from 'react';
 
 // Components
-import Card from './card'
+import Card from './Card'
 
 export default function Cards () {
     return (
         <div>
-            <Card />
+            
         </div>
     );
 };
