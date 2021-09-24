@@ -1,7 +1,4 @@
-import React from 'react';
-
-// Link to
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
 
 // Components 
 import Nav from '../components/nav';
@@ -18,10 +15,8 @@ export default function Home () {
             <input placeholder='Raza...'/>
             {/* pasarle argumento de card */}
             <Cards />
-            <div>
-                <p>
-                    PAGINADO
-                </p>
+            <div id='card'>
+                
             </div>
         </>
     );

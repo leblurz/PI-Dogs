@@ -18,10 +18,9 @@ const {
 
 const apiData = async () => {
     const api = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${KEY}`);
-    
     const dataApi = await api.data.map ( e => {
         return {
-            id: e.id,
+            id: e.id.toString(),
             nombre: e.name,
             altura: e.height.metric,
             peso: e.weight.metric,
@@ -35,7 +34,7 @@ const apiData = async () => {
 };
 
 const dataDB = async () => {
-    return await Breed.findAll({
+    const pedido = await Breed.findAll({
         include: {
             model: Temperament,
             attributes: ['name'],
@@ -44,6 +43,19 @@ const dataDB = async () => {
             },
         }
     });
+    const filt = [];
+    pedido.forEach(e => {
+        return filt.push({
+            nombre: e.nombre,
+            altura: e.altura,
+            peso: e.peso,
+            vida: e.vida,
+            Image: e.Image,
+            id: e.id,
+            temperamento: e.temperaments[0].dataValues.name
+        });
+    });
+    return filt;
 };
 
 const allData = async () => {
