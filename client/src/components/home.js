@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
 // Components 
-import Nav from '../components/nav';
-import Cards from '../components/cards';
-import Filter from './filter';
-import Sort from './sort'
+import Nav from './Nav';
+import Cards from './cards';
+import SearchBar from './SearchBar';
 import card from './Card';
 
 import { getDogs, getTemps, getQuery, getById } from "../actions"
@@ -40,7 +39,7 @@ function Home ({payload, loading}) {
     const pagesVisited = pageActual * breedPerPage;
 
     //paginado en render de lo que muestro, de todos los perros solo tomo lo del paginado
-    const razaActual = razas.slice(pagesVisited, pagesVisited + breedPerPage);
+    const razaActual =razas.slice (pagesVisited, pagesVisited + breedPerPage) 
 
     // Set paginacion
     const paginacion = (pag) => {
@@ -52,10 +51,10 @@ function Home ({payload, loading}) {
     const changePage = ({selected}) => {
         setPageActual(selected);
     };
-
     return (
         <div>
             <Nav />
+            <SearchBar />
             <div>
                 {
                     loading === true ? <h1>CARGANDO</h1> : <div>

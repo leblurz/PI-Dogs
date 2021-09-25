@@ -6,9 +6,9 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 
 // Components
-import Landing from '../components/landing.js';
-import Home from '../components/home';
-import Breed from '../components/breed';
+import Landing from '../components/Landing.js';
+import Home from '../components/Home'
+import Breed from '../components/Breed';
 import Form from '../components/form'
 
 function App() {

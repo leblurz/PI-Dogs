@@ -34,12 +34,8 @@ export function dataDogs (payload) {
     }
 };
 
-
-
-
 export function getTemps (payload) {
     return function (dispatch) {
-        dispatch(awaitTemps());
         axios.get(temps)
             .then(r => r.data)
             .then(d => dispatch(dataTemps(d)))
@@ -67,12 +63,8 @@ export function dataTemps (payload) {
     }
 };
 
-
-
-
-export function getQuery (payload) {
+export function getQueryName (payload) {
     return function (dispatch) {
-        dispatch(awaitQuery());
         axios.get(`${dogs}?name=${payload}`)
             .then(r => r.data)
             .then(d => dispatch(dataQuery(d)))
@@ -99,8 +91,6 @@ export function dataQuery (payload) {
         console.log("Esta fallando la ruta de detalle", error)
     }
 };
-
-
 
 export function getById (id) {
     return function (dispatch) {
@@ -131,7 +121,6 @@ export function dataById  (payload) {
         console.log("Esta fallando la ruta de detalle", error)
     }
 }
-
 
 export function setByName (payload) {
     try {

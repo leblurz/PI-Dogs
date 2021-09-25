@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/Form.css';
 
 // Components
-import Nav from '../components/nav';
+import Nav from './Nav';
 
 export default function Form () {
     return (

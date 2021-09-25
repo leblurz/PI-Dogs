@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
 // Components 
-import Nav from '../components/nav';
-import Cards from '../components/cards';
-import Filter from './filter';
-import Sort from './sort'
+import Nav from './Nav';
+import Cards from './cards';
+import SearchBar from './SearchBar'
 import card from './Card';
 
 import { getDogs, getTemps, getQuery, getById, dataById } from "../actions"
@@ -42,11 +41,11 @@ export default function Breed (prop) {
                 {
                     dog.loading === true ? <h1>CARGANDO</h1> :
                     <div>
-                    <h3>{dog.payload[0].nombre}</h3>
-                    <h3>{dog.payload[0].altura}</h3>
-                    <h3>{dog.payload[0].peso}</h3>
-                    <h3>{dog.payload[0].temperamento}</h3>
-                    <h3>{dog.payload[0].vida}</h3>
+                    <h3>Nombre: {dog.payload[0].nombre}</h3>
+                    <h3>Altura: {dog.payload[0].altura}</h3>
+                    <h3>Peso: {dog.payload[0].peso}</h3>
+                    <h3>Temperamento: {dog.payload[0].temperamento}</h3>
+                    <h3>Vida: {dog.payload[0].vida}</h3>
                     <img src={dog.payload[0].Image}/>
                     </div>
                 }
