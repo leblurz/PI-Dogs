@@ -9,14 +9,16 @@ import card from './Card';
 
 import { getDogs, getTemps, getQuery, getById } from "../actions"
 import { useDispatch, useSelector } from 'react-redux';
-
+import _ from 'underscore';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../actions/index.js';
 
+
+import {Link} from 'react-router-dom'; 
 import ReactPaginate from 'react-paginate';
 
-function Home ({payload}) {
+function Home ({payload, loading}) {
 
     // Dispatcher
     const dispatch = useDispatch();
@@ -28,7 +30,7 @@ function Home ({payload}) {
     }, [dispatch])
 
     // Seteo una constante con las razas
-    const razas = useSelector((state) => state.payload)
+    const razas = useSelector((state) => state.payload, _.isEqual)
 
     // Seteo pag actual
     const [pageActual, setPageActual] = useState(0);
@@ -55,7 +57,9 @@ function Home ({payload}) {
         <div>
             <Nav />
             <div>
-                
+                {
+                    loading === true ? <h1>CARGANDO</h1> : <div>
+                        
             <select title="Alternar el orden alfabético">
                 <option value="az">A-Z</option>
                 <option value="za">Z-A</option>
@@ -76,14 +80,16 @@ function Home ({payload}) {
                 />
 
                 {razaActual.map(e=>{
+                    const rut = `/breed/${e.id}`
                     return (
+                        <Link to ={rut}>
                         <div>
                             <h3>{e.nombre}</h3>
                             <h3>{e.temperamento}</h3>
                             <h3>{e.peso}</h3>
                             <img src ={e.Image} />
                         </div>
-                    
+                        </Link>
                     )})}
 
                 <ReactPaginate
@@ -99,6 +105,7 @@ function Home ({payload}) {
                     pageRangeDisplayed={4}
                     breakLabel={null}
                 />
+                </div>}
             </div>
         </div>
     );

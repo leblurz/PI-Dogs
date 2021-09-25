@@ -105,7 +105,7 @@ export function dataQuery (payload) {
 export function getById (id) {
     return function (dispatch) {
         dispatch(awaitById());
-        axios.get(`${byId}/${id}`)
+        axios.get(`http://localhost:3001/dogs/${id}`)
             .then(r => r.data)
             .then(d => dispatch(dataById(d)))
         .catch(e => console.log(e));

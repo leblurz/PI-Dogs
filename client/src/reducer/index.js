@@ -43,7 +43,7 @@ export default (state = initialState, action) => {
         case 'AWAIT_BYID':
             return {
                 ...state,
-                loading: false,
+                loading: true,
                 payload: action.payload
             }
         case 'DATA_BYID':

@@ -23,9 +23,7 @@ function App() {
         <Home />
       </Route>
 
-      <Route path='/breed'>
-        <Breed />
-      </Route>
+      <Route path='/breed/:id' component={Breed}/>
 
       <Route path='/form'>
         <Form />
