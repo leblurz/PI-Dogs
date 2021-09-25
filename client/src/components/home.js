@@ -6,7 +6,7 @@ import Cards from './cards';
 import SearchBar from './SearchBar';
 import card from './Card';
 
-import { getDogs, getTemps, getQuery, getById } from "../actions"
+import { getDogs, getTemps, getQuery, getById, sortByName, sortByWeight } from "../actions"
 import { useDispatch, useSelector } from 'react-redux';
 import _ from 'underscore';
 import { connect } from 'react-redux';
@@ -41,16 +41,25 @@ function Home ({payload, loading}) {
     //paginado en render de lo que muestro, de todos los perros solo tomo lo del paginado
     const razaActual =razas.slice (pagesVisited, pagesVisited + breedPerPage) 
 
-    // Set paginacion
-    const paginacion = (pag) => {
-        setPageActual(pag)
-    };
-
     const pageCount = Math.ceil(razas.length / breedPerPage)
 
     const changePage = ({selected}) => {
         setPageActual(selected);
     };
+
+    function handleSortName (e) {
+        e.preventDefault();
+        dispatch(sortByName(e));
+        setPageActual(1);
+    };
+
+    
+    function handleSortWeight (e) {
+        e.preventDefault();
+        dispatch(sortByWeight(e));
+        setPageActual(1);
+    };
+
     return (
         <div>
             <Nav />
@@ -59,9 +68,9 @@ function Home ({payload, loading}) {
                 {
                     loading === true ? <h1>CARGANDO</h1> : <div>
                         
-            <select title="Alternar el orden alfabético">
-                <option value="az">A-Z</option>
-                <option value="za">Z-A</option>
+            <select title="Alternar el orden alfabético" onChange={e=>handleSortName(e)}>
+                <option value="AZ">A-Z</option>
+                <option value="ZA">Z-A</option>
             </select>
 
             <ReactPaginate
@@ -83,10 +92,10 @@ function Home ({payload, loading}) {
                     return (
                         <Link to ={rut}>
                         <div>
-                            <h3>{e.nombre}</h3>
-                            <h3>{e.temperamento}</h3>
-                            <h3>{e.peso}</h3>
-                            <img src ={e.Image} />
+                            <h3>{e.name}</h3>
+                            <h3>{e.temperament}</h3>
+                            <h3>{e.weight}</h3>
+                            <img src ={e.image} />
                         </div>
                         </Link>
                     )})}

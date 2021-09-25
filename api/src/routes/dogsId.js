@@ -17,7 +17,6 @@ router.get('/:id', async (req, res) => {
         if (paras.length === 36) {
             const DB = await dataDB();
             const arrDB = DB.filter(e=>e.id === paras);
-            console.log(arrDB)
             if (arrDB.length > 0){
                 return res.status(200).json(arrDB);
             }

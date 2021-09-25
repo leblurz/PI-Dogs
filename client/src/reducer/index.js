@@ -52,6 +52,14 @@ export default (state = initialState, action) => {
                 loading: false,
                 payload: action.payload
             }
+        case 'SORT_NAME' :
+            return ({})
+        case 'SORT_WEIGHT':
+            return ({})
+        case "POST_DOG" :
+            return {
+                ...state
+            }
         default:
             return {
                 ...state

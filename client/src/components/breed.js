@@ -41,12 +41,12 @@ export default function Breed (prop) {
                 {
                     dog.loading === true ? <h1>CARGANDO</h1> :
                     <div>
-                    <h3>Nombre: {dog.payload[0].nombre}</h3>
-                    <h3>Altura: {dog.payload[0].altura}</h3>
-                    <h3>Peso: {dog.payload[0].peso}</h3>
-                    <h3>Temperamento: {dog.payload[0].temperamento}</h3>
-                    <h3>Vida: {dog.payload[0].vida}</h3>
-                    <img src={dog.payload[0].Image}/>
+                    <h3>name: {dog.payload[0].name}</h3>
+                    <h3>height: {dog.payload[0].height}</h3>
+                    <h3>weight: {dog.payload[0].weight}</h3>
+                    <h3>temperament: {dog.payload[0].temperament}</h3>
+                    <h3>life: {dog.payload[0].life}</h3>
+                    <img src={dog.payload[0].image}/>
                     </div>
                 }
             </div>

@@ -21,13 +21,13 @@ const apiData = async () => {
     const dataApi = await api.data.map ( e => {
         return {
             id: e.id.toString(),
-            nombre: e.name,
-            altura: e.height.metric,
-            peso: e.weight.metric,
-            temperamento: e.temperament,
+            name: e.name,
+            height: e.height.metric,
+            weight: e.weight.metric,
+            temperament: e.temperament,
             // Traduccion al español
-            vida: e.life_span.replace("years", "años"),
-            Image: e.image.url,
+            life: e.life_span,
+            image: e.image.url,
         };
     });
     return dataApi;
@@ -46,13 +46,13 @@ const dataDB = async () => {
     const filt = [];
     pedido.forEach(e => {
         return filt.push({
-            nombre: e.nombre,
-            altura: e.altura,
-            peso: e.peso,
-            vida: e.vida,
-            Image: e.Image,
+            name: e.name,
+            height: e.height,
+            weight: e.weight,
+            life: e.life,
+            image: e.image,
             id: e.id,
-            temperamento: e.temperaments[0].dataValues.name
+            temperament: e.temperaments[0].dataValues.name
         });
     });
     return filt;

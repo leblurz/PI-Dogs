@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
         // Caso con query
         if (raza){
             // Filtrado de razas
-            const filt = data.filter(e => e.nombre.toLowerCase().includes(raza.toLowerCase()));
+            const filt = data.filter(e => e.name.toLowerCase().includes(raza.toLowerCase()));
             if (filt.length > 0){
                 // En caso de matchear
                 res.status(200).json(filt)

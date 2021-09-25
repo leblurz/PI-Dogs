@@ -21,8 +21,8 @@ router.get ('/temperament', async (req, res) => {
 
         // Separa los strings en nuevos arreglos divididos entre las comas
         data.map ( e => {
-            if (e.temperamento) {
-                temp.push(e.temperamento.split(','));
+            if (e.temperament) {
+                temp.push(e.temperament.split(','));
             };
         });
 

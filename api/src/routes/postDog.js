@@ -11,22 +11,22 @@ const { Breed, Temperament } = require('../db');
 const router = Router();
 
 router.post('/', async (req, res) => {
-    const { nombre, altura, peso, temperamento,
-        vida, image } = await req.body; 
+    const { name, height, weight, temperament,
+        life, image } = await req.body; 
     // Creacion de la columna
     try {
         // Se crea la raza
         const perro = await Breed.create({
-            nombre : nombre,
-            altura: altura,
-            peso : peso,
-            vida : vida + ' ' + "años",
+            name : name,
+            height: height,
+            weight : weight,
+            life : life + ' ' + "years",
             image : image
         })
 
         const ifCreated = await Temperament.findAll({
             where: {
-                name: temperamento.replace(/^\w/, (c) => c.toUpperCase())
+                name: temperament.replace(/^\w/, (c) => c.toUpperCase())
         }
     })
 
@@ -37,7 +37,7 @@ router.post('/', async (req, res) => {
     else {
     // Se crea el temperamento
     const tempDB = await Temperament.create({
-            name: temperamento.replace(/^\w/, (c) => c.toUpperCase()),
+            name: temperament.replace(/^\w/, (c) => c.toUpperCase()),
     });
     // Se relacionan
     perro.addTemperament(tempDB);
