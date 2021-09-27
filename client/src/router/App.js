@@ -15,7 +15,7 @@ function App() {
   
   return (
     <Router>
-
+      
       <Route exact path='/'>
         <Landing />
       </Route>

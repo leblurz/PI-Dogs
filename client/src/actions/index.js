@@ -132,33 +132,6 @@ export function postNewDog(payload) {
     }
 }
 
-export function sortByName (payload) {
-    try {
-        return {
-            type: 'SORT_NAME',
-            loading: false,
-            payload
-        }
-    }
-    catch(error){
-        console.log("Esta fallando la ruta de detalle", error)
-    }
-}
-
-export function sortByWeight (payload) {
-    try {
-        return {
-            type: 'SORT_WEIGHT',
-            loading: false,
-            payload
-        }
-    }
-    catch(error){
-        console.log("Esta fallando la ruta de detalle", error)
-    }
-}
-
-
 export function sortBy (payload) {
     try {
         return {

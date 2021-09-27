@@ -27,10 +27,10 @@ export default function Home ({payload, loading}) {
 
     // Seteo una constante con las razas
     const razas = useSelector((state) => state.payload, _.isEqual);
+    const temps = useSelector((state) => state.temperaments, _.isEqual);
 
     // Seteo pag actual
     const [pageActual, setPageActual] = useState(0);
-
     // Logica del paginado
     const breedPerPage = 8;
     const pagesVisited = pageActual * breedPerPage;
@@ -71,6 +71,15 @@ export default function Home ({payload, loading}) {
                                     <option value="UP">UP</option>
                                     <option value="DOWN">DOWN</option>
                                 </optgroup>
+
+                                <optgroup label="From where " title="Alter by weight">
+                                    <option value="API">API</option>
+                                    <option value="MYDB">My DB</option>
+                                </optgroup>
+
+                                <optgroup label="Temperaments">
+                                    {temps.map(e => <option key={e.name} value={e.name}>{e.name}</option>)}
+                                </optgroup>   
                             </select>
 
                             <ReactPaginate
