@@ -58,7 +58,7 @@ export default (state = initialState, action) => {
             return ({})
         case "POST_DOG" :
             return {
-                ...state
+                ...state,
             }
         default:
             return {

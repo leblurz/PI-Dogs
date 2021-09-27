@@ -12,6 +12,7 @@ import Breed from '../components/Breed';
 import Form from '../components/form'
 
 function App() {
+  
   return (
     <Router>
 
@@ -25,9 +26,7 @@ function App() {
 
       <Route path='/breed/:id' component={Breed}/>
 
-      <Route path='/form'>
-        <Form />
-      </Route>
+      <Route path='/form' component={Form} />
       
     </Router>
   );

@@ -149,15 +149,13 @@ export function sortByWeight (payload) {
 }
 
 export function postNewDog(payload) {
-    try {
+    return async function (dispatch) {
+        const respuesta = await axios.post("http://localhost:3001/dog", payload);
+        console.log("SOY POST:", respuesta)
         return {
-            type: "POST_DOG",
-            loading: false,
-            payload
+            type: 'POST_DOG',
+            payload: respuesta
         }
-    }
-    catch(error){
-        console.log("Esta fallando la ruta de detalle", error)
     }
 }
 

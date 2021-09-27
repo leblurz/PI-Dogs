@@ -59,6 +59,7 @@ function Home ({payload, loading}) {
         dispatch(sortByWeight(e));
         setPageActual(1);
     };
+    
 
     return (
         <div>

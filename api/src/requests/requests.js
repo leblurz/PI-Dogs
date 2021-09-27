@@ -44,7 +44,9 @@ const dataDB = async () => {
         }
     });
     const filt = [];
+    const toString = '';
     pedido.forEach(e => {
+        const unidos = e.temperaments.map(e=>e.dataValues.name)
         return filt.push({
             name: e.name,
             height: e.height,
@@ -52,7 +54,7 @@ const dataDB = async () => {
             life: e.life,
             image: e.image,
             id: e.id,
-            temperament: e.temperaments[0].dataValues.name
+            temperament: unidos.join(', ')
         });
     });
     return filt;
@@ -61,7 +63,6 @@ const dataDB = async () => {
 const allData = async () => {
     const DB = await dataDB();
     const Api = await apiData();
-
     return DB.concat(Api)
 };
 

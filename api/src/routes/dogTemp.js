@@ -33,7 +33,7 @@ router.get ('/temperament', async (req, res) => {
             });
         };
 
-        // Saca los espacios al principip
+        // Saca los espacios al principio
         const space = st.map(e => e.trim())
         // Filtra los repetidos
         const uni = _.uniq(space);
