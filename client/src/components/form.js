@@ -11,26 +11,44 @@ import { postNewDog } from "../actions/index"
 
 export default function Form (props) {
     const dispatch = useDispatch()
-    
+
+    const [err, setErr] = useState({
+        name: '',
+        heightMin: '',
+        heightMax: '',
+        weightMin: '',
+        weightMax: '',
+        temperament: '',
+        life: '',
+    });
+
     function handleSubmit(e) {
         e.preventDefault();
+        if (err.name === '' ||
+            err.heightMin === '' ||
+            err.heightMax === '' ||
+            err.weightMin === '' ||
+            err.weightMax === '' ||
+            err.temperament === '' ||
+            err.life === '') return (
+                alert('Falta completar algun campo obligatorio')
+            )
         dispatch(postNewDog({
             name: dogo.name,
-            height: dogo.height + ' ' + '-' + ' ' + max.heightMax,
-            weight: dogo.weight +  ' ' + '-' + ' ' + max.weightMax,
+            height: dogo.heightMin + ' ' + '-' + ' ' + max.heightMax,
+            weight: dogo.weightMin +  ' ' + '-' + ' ' + max.weightMax,
             temperament: dogo.temperament,
             life: dogo.life,
             image: dogo.image
         }))
         alert("La nueva raza fue creada de manera satisfactoria");
         setDogo({
-            name : "",
-            height : "",
-            weight : "",
-            temperament : [],
-            life_span : "",
-            Image :"",  
-            flagByUser : true
+            name : '',
+            height : '',
+            weight : '',
+            temperament : '',
+            life : '',
+            Image :'',  
         })
         props.history.push('/home')
     }
@@ -42,8 +60,8 @@ export default function Form (props) {
 
     const [dogo, setDogo] = useState({
         name: '',
-        height : '',
-        weight : '',
+        heightMin : '',
+        weightMin : '',
         temperament : '',
         life : '',
         image :'',  
@@ -54,11 +72,19 @@ export default function Form (props) {
             ...dogo,
             [e.target.name] : e.target.value
         })
+        setErr({
+            ...err,
+            [e.target.name] : e.target.value
+        })
     }
 
     function handleChangeMax(e){
         setMax({
             ...max,
+            [e.target.name] : e.target.value
+        })
+        setErr({
+            ...err,
             [e.target.name] : e.target.value
         })
     }
@@ -72,7 +98,7 @@ export default function Form (props) {
                 <label>Nombre: </label>
                 <input required type="text" value={dogo.name} name="name" onChange={e => handleChange(e)}/>
 
-                <input required  type="number"
+                <input required type="number"
                 name="life" 
                 id="life" 
                 min="1" max="30" 
@@ -82,9 +108,9 @@ export default function Form (props) {
                 onChange={e => handleChange(e)} 
                 />
 
-                <input required  type="number" 
-                name="height" 
-                id="height" 
+                <input required type="number" 
+                name="heightMin" 
+                id="heightMin" 
                 min="1" max="200" 
                 step="1"
                 value={dogo.height}
@@ -92,7 +118,7 @@ export default function Form (props) {
                 onChange={e => handleChange(e)}
                 />
 
-                <input required  type="number" 
+                <input required type="number" 
                 name="heightMax" 
                 id="heightMax" 
                 min="1" max="200" 
@@ -102,9 +128,9 @@ export default function Form (props) {
                 onChange={e => handleChangeMax(e)}
                 />
 
-                <input required  type="number" 
-                name="weight" 
-                id="weight" 
+                <input required type="number" 
+                name="weightMin" 
+                id="weightMin" 
                 min="1" max="80" 
                 step="1"
                 placeholder='Weight min(KG)...'
@@ -112,7 +138,7 @@ export default function Form (props) {
                 onChange={e => handleChange(e)}
                 />
 
-                <input required  type="number" 
+                <input required type="number" 
                 name="weightMax" 
                 id="weightMax" 
                 min="1" max="200" 
@@ -133,7 +159,7 @@ export default function Form (props) {
                 />
 
             </form>
-                <input type='submit' onClick={e=>handleSubmit(e)}/>
+            <input type='submit' onClick={e=>handleSubmit(e)}/>
         </div>
         </>
     );

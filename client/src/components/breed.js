@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 // Components 
 import Nav from './Nav';
-import Cards from './cards';
 import SearchBar from './SearchBar'
-import card from './Card';
 
 import { getDogs, getTemps, getQuery, getById, dataById } from "../actions"
 import { useDispatch, useSelector } from 'react-redux';

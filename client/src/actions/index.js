@@ -43,19 +43,19 @@ export function getTemps (payload) {
     };
 }
 
-export function awaitTemps () {
-    return {
-        type: 'AWAIT_TEMPS',
-        loading: true,
-    };
-};
+// export function awaitTemps () {
+//     return {
+//         type: 'AWAIT_TEMPS',
+//         loading: true,
+//     };
+// };
 
 export function dataTemps (payload) {
     try {
         return {
             type: 'DATA_TEMPS',
             loading: false,
-            payload
+            temperaments: payload
         }
     }
     catch(error){
@@ -72,12 +72,12 @@ export function getQueryName (payload) {
     };
 }
 
-export function awaitQuery () {
-    return {
-        type: 'AWAIT_QUERY',
-        loading: true,
-    };
-};
+// export function awaitQuery () {
+//     return {
+//         type: 'AWAIT_QUERY',
+//         loading: true,
+//     };
+// };
 
 export function dataQuery (payload) {
     try {
@@ -122,6 +122,16 @@ export function dataById  (payload) {
     }
 }
 
+export function postNewDog(payload) {
+    return async function (dispatch) {
+        const respuesta = await axios.post("http://localhost:3001/dog", payload);
+        return {
+            type: 'POST_DOG',
+            payload: respuesta
+        }
+    }
+}
+
 export function sortByName (payload) {
     try {
         return {
@@ -148,14 +158,16 @@ export function sortByWeight (payload) {
     }
 }
 
-export function postNewDog(payload) {
-    return async function (dispatch) {
-        const respuesta = await axios.post("http://localhost:3001/dog", payload);
-        console.log("SOY POST:", respuesta)
+
+export function sortBy (payload) {
+    try {
         return {
-            type: 'POST_DOG',
-            payload: respuesta
+            type: 'SORT_BY',
+            loading: false,
+            payload
         }
     }
+    catch(error){
+        console.log("Esta fallando la ruta de detalle", error)
+    }
 }
-
