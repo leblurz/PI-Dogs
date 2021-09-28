@@ -35,7 +35,12 @@ export default function Form (props) {
             )
         if (err.heightMin > err.heightMax) {
             return (
-                alert('Height-Min ')
+                alert('Wrong height')
+            )
+        }
+        if (err.weightMin > err.weightMax) {
+            return (
+                alert('Wrong weight')
             )
         }
         if (err.life > 50 || err.life <= 0) {
