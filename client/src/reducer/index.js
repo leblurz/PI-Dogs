@@ -3,7 +3,8 @@ const initialState = {
     payload : [],
     loading: false,
     temperaments: [],
-    payloadBackUp: []
+    payloadBackUp: [],
+    setErr: false
 }
 
 export default function rootReducer (state = initialState, action) {
@@ -12,12 +13,14 @@ export default function rootReducer (state = initialState, action) {
         case 'AWAIT_DOGS':
             return {
                 ...state,
+                setErr: false,
                 loading: true
             };
         // Set loading true
         case 'AWAIT_TEMPS':
             return {
                 ...state,
+                setErr: false,
                 loading: true
             };
         // Data on Board
@@ -25,6 +28,7 @@ export default function rootReducer (state = initialState, action) {
             return {
                 ...state,
                 loading: false,
+                setErr: false,
                 payload: action.payload,
                 payloadBackUp: action.payload
             };
@@ -33,6 +37,7 @@ export default function rootReducer (state = initialState, action) {
             return {
                 ...state,
                 loading: false,
+                setErr: false,
                 temperaments: action.temperaments
             };
         // Data on Board
@@ -40,6 +45,7 @@ export default function rootReducer (state = initialState, action) {
             return {
                 ...state,
                 loading: false,
+                setErr: false,
                 payload: action.payload
             };
         // Data on Board
@@ -47,12 +53,14 @@ export default function rootReducer (state = initialState, action) {
             return {
                 ...state,
                 loading: false,
+                setErr: false,
                 payload: action.payload
             };
         // Data on Board
         case "POST_DOG" :
             return {
                 ...state,
+                setErr: false,
             };
         // Data on Board
         case 'SORT_BY' :
@@ -68,6 +76,7 @@ export default function rootReducer (state = initialState, action) {
                 });
                 return {
                     ...state,
+                    setErr: false,
                     payload: filt
                 };
             };
@@ -83,24 +92,28 @@ export default function rootReducer (state = initialState, action) {
                 });
                 return {
                     ...state,
+                    setErr: false,
                     payload: filtWeight
                 };
             };
             if (action.payload === 'MYDB') {
                 return {
                     ...state,
+                    setErr: false,
                     payload: state.payloadBackUp.filter(e => e.id.length === 36)
                 }
             };
             if (action.payload === 'API') {
                 return {
                     ...state,
+                    setErr: false,
                     payload: state.payloadBackUp.filter ( e=> e.id.length < 36)
                 }
             }
             if (action.payload === 'default') {
                 return {
                     ...state,
+                    setErr: false,
                     payload: state.payloadBackUp.sort((a, b) => {
                         if (a.name > b.name) return 1;
                         if (b.name > a.name) return -1;
@@ -120,9 +133,15 @@ export default function rootReducer (state = initialState, action) {
                 })
                 return {
                     ...state,
+                    setErr: false,
                     payload: filtByTemp[0] !== undefined ? filtByTemp : []
                 }
             };
+        case 'ERROR' :
+            return {
+                ...state,
+                setErr: true
+            }
         // Default case
         default:
             return {

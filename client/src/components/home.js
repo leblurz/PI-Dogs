@@ -4,7 +4,7 @@ import '../styles/Home.css'
 import SearchBar from './SearchBar';
 
 // Action creators
-import { getDogs, getTemps, sortBy } from "../actions"
+import { dataDogs, getDogs, getTemps, sortBy } from "../actions"
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -15,7 +15,7 @@ import _ from 'underscore';
 import {Link} from 'react-router-dom'; 
 import ReactPaginate from 'react-paginate';
 
-export default function Home () {
+export default function Home (props) {
 
     // Dispatcher
     const dispatch = useDispatch();
@@ -33,7 +33,9 @@ export default function Home () {
     // Const whit temps
     const temps = useSelector((state) => state.temperaments, _.isEqual);
     // Const whit loading
-    const loading = useSelector((state) => state.loading, _.isEqual)
+    const loading = useSelector((state) => state.loading, _.isEqual);
+    // Const whit err
+    const thisError = useSelector((state) => state.setErr, _.isEqual);
 
     // Seteo pag actual
     const [pageActual, setPageActual] = useState(0);
@@ -61,10 +63,23 @@ export default function Home () {
         setPageActual(0);
     }
 
+    function refreshing (e) {
+        props.history.push(props.match.url)
+        window.location.reload(true);
+    };
+
     return (
         <div>
             <div>
                 {
+                    thisError === true ?
+                        <div className='containSetErr'>
+                            <div className='SetErr'>
+                                <h1>No encontramos la raza ingresada: </h1>
+                                <button onClick={e=>refreshing(e)}>REFRESH</button>
+                            </div>
+                        </div>
+                    :
                     loading === true ?
                     <div className='loadingDog'> 
                             <img src='https://reygif.com/media/1/pug-corriendo-10974.gif' alt='Running Dog' />
@@ -80,8 +95,8 @@ export default function Home () {
                                     <option value="ZA">Z-A</option>
                                 </optgroup>
                                 <optgroup label="For Weight" title="Alter by weight">
-                                    <option value="UP">UP</option>
-                                    <option value="DOWN">DOWN</option>
+                                    <option value="DOWN">UP</option>
+                                    <option value="UP">DOWN</option>
                                 </optgroup>
                                 <optgroup label="From where " title="Alter by weight">
                                     <option value="API">API</option>
@@ -129,24 +144,13 @@ export default function Home () {
                                     </div>
                             )})}
                         </div>
-                            <div className='paginated'>
-                                <ReactPaginate
-                                previousLabel={"Prev"}
-                                nextLabel={"Next"}
-                                pageCount={pageCount}
-                                onPageChange={changePage}
-                                containerClassName={"paginationBtn"}
-                                previousClassName={"prevBtn"}
-                                nextClassName={"nextBtn"}
-                                disabledClassName={"paginationDis"}
-                                activeClassName={"paginationActive"}
-                                pageRangeDisplayed={1}
-                                breakLabel={null}
-                                />
-                            </div>
                         </div>
                             :
                             <div className='loadingDog'>
+                                <div className='SetErr'>
+                                    <h1>No encontramos la raza ingresada: </h1>
+                                    <button onClick={e=>refreshing(e)}>REFRESH</button>
+                                </div>
                                 <img src='https://i.pinimg.com/originals/18/0d/95/180d95834d68ad0add738b765a82c97a.gif' alt='Lost Dog' />
                             </div>
                             }

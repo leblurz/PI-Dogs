@@ -22,9 +22,7 @@ function App() {
 
       <Nav />
 
-      <Route path='/home'>
-        <Home />
-      </Route>
+      <Route path='/home' component= {Home} />
 
       <Route path='/breed/:id' component={Breed}/>
 

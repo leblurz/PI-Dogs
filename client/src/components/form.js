@@ -24,15 +24,25 @@ export default function Form (props) {
     function handleSubmit(e) {
         e.preventDefault();
         // Error case
-        if (err.name === '' ||
+        if (err.name === '' || 
             err.heightMin === '' ||
-            err.heightMax === '' ||
+            err.heightMax === '' || 
             err.weightMin === '' ||
             err.weightMax === '' ||
             err.temperament === '' ||
             err.life === '') return (
-                alert('Falta completar algun campo obligatorio')
+                alert('All fields whit * need to be completed')
             )
+        if (err.heightMin > err.heightMax) {
+            return (
+                alert('Height-Min ')
+            )
+        }
+        if (err.life > 50 || err.life <= 0) {
+            return (
+                alert('Is too old or young to die, dont you think?')
+            );
+        }
         // Const for concat evititing warnings
         const guion = '-';
         const space = ' ';
@@ -45,7 +55,7 @@ export default function Form (props) {
             image: dogo.image
         }))
         // Succes
-        alert("La nueva raza fue creada de manera satisfactoria");
+        alert("Successfully created");
         // Set blank inputs
         setDogo({
             name : '',
@@ -108,7 +118,7 @@ export default function Form (props) {
                     className='placeHolder' 
                     type="text" 
                     value={dogo.name} 
-                    placeholder='Name...'
+                    placeholder='* Name...'
                     name="name" 
                     onChange={e => handleChange(e)}/>
                 </div>
@@ -119,7 +129,7 @@ export default function Form (props) {
                     min="1" max="30" 
                     step="1"
                     className='placeHolder'
-                    placeholder='Life...'
+                    placeholder='* Life...'
                     value={dogo.life}
                     onChange={e => handleChange(e)} 
                     />
@@ -132,7 +142,7 @@ export default function Form (props) {
                     min="1" max="200" 
                     step="1"
                     value={dogo.height}
-                    placeholder='Height min(CM)...'
+                    placeholder='* Height min(CM)...'
                     onChange={e => handleChange(e)}
                     />
                     <input required type="number" 
@@ -142,7 +152,7 @@ export default function Form (props) {
                     min="1" max="200" 
                     step="1"
                     value={max.heightMax}
-                    placeholder='Height max(CM)...'
+                    placeholder='* Height max(CM)...'
                     onChange={e => handleChangeMax(e)}
                     />
                 </div>
@@ -152,7 +162,7 @@ export default function Form (props) {
                 id="weightMin" 
                 min="1" max="80" 
                 step="1"
-                placeholder='Weight min(KG)...'
+                placeholder='* Weight min(KG)...'
                 value={dogo.weight}
                 onChange={e => handleChange(e)}
                 />
@@ -164,7 +174,7 @@ export default function Form (props) {
                 min="1" max="200" 
                 step="1"
                 value={max.weightMax}
-                placeholder='Height max(CM)...'
+                placeholder='* Height max(KG)...'
                 onChange={e => handleChangeMax(e)}
                 />
 
@@ -174,7 +184,7 @@ export default function Form (props) {
                     value={dogo.temperament} 
                     name="temperament"
                     className='placeHolder'
-                    placeholder='Temperaments...' 
+                    placeholder='* Temperaments...' 
                     onChange={e => handleChange(e)}/>
                 </div>
 

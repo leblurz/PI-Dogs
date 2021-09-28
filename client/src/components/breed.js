@@ -33,6 +33,9 @@ export default function Breed (prop) {
                         <img src='https://reygif.com/media/1/pug-corriendo-10974.gif' alt='loading' />
                     </div>
                     :
+                    dog.payload.length === 0 ? 
+                    dispatch(getById(idProp))
+                    :
                     // Data
                     <div className='containerConta' >
                         <div className='containerDog'>

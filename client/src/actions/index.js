@@ -71,7 +71,7 @@ export function getQueryName (payload) {
         axios.get(`${dogs}?name=${payload}`)
             .then(r => r.data)
             .then(d => dispatch(dataQuery(d)))
-        .catch(e => console.log(e));
+        .catch(e => dispatch(setError()));
     };
 }
 
@@ -134,6 +134,18 @@ export function sortBy (payload) {
             type: 'SORT_BY',
             loading: false,
             payload
+        }
+    }
+    catch(error){
+        console.log("Esta fallando la ruta de detalle", error)
+    }
+}
+
+export function setError (payload) {
+    try {
+        return {
+            type: 'ERROR',
+            loading: false,
         }
     }
     catch(error){
