@@ -1,8 +1,9 @@
+// Fetching
 import axios from 'axios';
 
+// URLS
 const dogs = 'http://localhost:3001/dogs';
 const temps = 'http://localhost:3001/dogs/temperament';
-const byId = 'http://localhost:3001/';
 
 export function getDogs (valor) {
     return function (dispatch) {
@@ -14,9 +15,17 @@ export function getDogs (valor) {
     };
 };
 
+// Loading
 export function awaitDogs () {
     return {
         type: 'AWAIT_DOGS',
+        loading: true,
+    };
+};
+
+export function awaitTemps () {
+    return {
+        type: 'AWAIT_TEMPS',
         loading: true,
     };
 };
@@ -36,19 +45,13 @@ export function dataDogs (payload) {
 
 export function getTemps (payload) {
     return function (dispatch) {
+        dispatch(awaitTemps())
         axios.get(temps)
             .then(r => r.data)
             .then(d => dispatch(dataTemps(d)))
         .catch(e => console.log(e));
     };
 }
-
-// export function awaitTemps () {
-//     return {
-//         type: 'AWAIT_TEMPS',
-//         loading: true,
-//     };
-// };
 
 export function dataTemps (payload) {
     try {
@@ -71,13 +74,6 @@ export function getQueryName (payload) {
         .catch(e => console.log(e));
     };
 }
-
-// export function awaitQuery () {
-//     return {
-//         type: 'AWAIT_QUERY',
-//         loading: true,
-//     };
-// };
 
 export function dataQuery (payload) {
     try {

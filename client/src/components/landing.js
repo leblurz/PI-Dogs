@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import s from '../styles/Landing.css';
+import React from 'react';
+import '../styles/Landing.css';
 
 // Link to
 import { Link } from "react-router-dom";
@@ -12,7 +12,7 @@ export default function Landing () {
         <div className='landGen'>
             <Link to='/home'>
                 <div className="land">
-                    <img src={dog} />
+                    <img src={dog} alt='Landing Page' />
                 </div>
             </Link>
         </div>

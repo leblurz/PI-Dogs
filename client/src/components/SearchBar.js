@@ -5,16 +5,19 @@ import { useDispatch } from "react-redux";
 import { getQueryName } from '../actions/index'
 
 export default function SearchBar() {
-    const dispatch = useDispatch()
-    const [raza, setRaza] = useState("")
+    const dispatch = useDispatch();
+    const [raza, setRaza] = useState("");
 
+    // Set raza
     function handleInputChange(e) {
-        e.preventDefault()
-        setRaza(e.target.value)
+        e.preventDefault();
+        setRaza(e.target.value);
     }
+
+    // Submit raza
     function handleSubmit(e){
-        e.preventDefault()
-        dispatch(getQueryName(raza))
+        e.preventDefault();
+        dispatch(getQueryName(raza));
     };
     
     return (

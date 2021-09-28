@@ -11,7 +11,7 @@ export default function Nav () {
         <header>
             <div className='navigation'>
                 <Link to='/home'>
-                    <img className='logo' src={dog}/>
+                    <img className='logo' src={dog} alt='Logo'/>
                 </Link>
                 <nav>
                     <Link to='/home'>

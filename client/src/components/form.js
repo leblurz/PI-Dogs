@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 import '../styles/Form.css';
 
+import { useDispatch } from 'react-redux';
 
-// Components
-import Nav from './Nav';
-
-import { useDispatch, useSelector } from 'react-redux';
-
+// Action Creator
 import { postNewDog } from "../actions/index"
 
 export default function Form (props) {
     const dispatch = useDispatch()
 
+    // Error
     const [err, setErr] = useState({
         name: '',
         heightMin: '',
@@ -22,8 +20,10 @@ export default function Form (props) {
         life: '',
     });
 
+    // Submit
     function handleSubmit(e) {
         e.preventDefault();
+        // Error case
         if (err.name === '' ||
             err.heightMin === '' ||
             err.heightMax === '' ||
@@ -33,15 +33,20 @@ export default function Form (props) {
             err.life === '') return (
                 alert('Falta completar algun campo obligatorio')
             )
+        // Const for concat evititing warnings
+        const guion = '-';
+        const space = ' ';
         dispatch(postNewDog({
-            name: dogo.name,
-            height: dogo.heightMin + ' ' + '-' + ' ' + max.heightMax,
-            weight: dogo.weightMin +  ' ' + '-' + ' ' + max.weightMax,
+            name: dogo.name.replace(/^\w/, (c) => c.toUpperCase()),
+            height: dogo.heightMin + space + guion + space + max.heightMax,
+            weight: dogo.weightMin + space + guion + space + max.weightMax,
             temperament: dogo.temperament,
             life: dogo.life,
             image: dogo.image
         }))
+        // Succes
         alert("La nueva raza fue creada de manera satisfactoria");
+        // Set blank inputs
         setDogo({
             name : '',
             height : '',
@@ -50,14 +55,17 @@ export default function Form (props) {
             life : '',
             Image :'',  
         })
+        // Redirect
         props.history.push('/home')
     }
 
+    // State to max
     const [max, setMax] = useState({
         heightMax: '',
         weightMax: ''
     });
 
+    // State + state to min
     const [dogo, setDogo] = useState({
         name: '',
         heightMin : '',
@@ -67,6 +75,7 @@ export default function Form (props) {
         image :'',  
     })
 
+    // Set whit changes
     function handleChange(e){
         setDogo({
             ...dogo,
@@ -78,6 +87,7 @@ export default function Form (props) {
         })
     }
 
+    // Set max whit changes
     function handleChangeMax(e){
         setMax({
             ...max,
@@ -90,9 +100,6 @@ export default function Form (props) {
     }
 
     return (
-        <>
-        <Nav/>
-        
         <div>
             <form>
                 <label>Nombre: </label>
@@ -161,7 +168,6 @@ export default function Form (props) {
             </form>
             <input type='submit' onClick={e=>handleSubmit(e)}/>
         </div>
-        </>
     );
     
 };

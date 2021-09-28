@@ -6,13 +6,21 @@ const initialState = {
     payloadBackUp: []
 }
 
-export default (state = initialState, action) => {
+export default function rootReducer (state = initialState, action) {
     switch(action.type) {
+        // Set loading true
         case 'AWAIT_DOGS':
             return {
                 ...state,
                 loading: true
             };
+        // Set loading true
+        case 'AWAIT_TEMPS':
+            return {
+                ...state,
+                loading: true
+            };
+        // Data on Board
         case 'DATA_DOGS':
             return {
                 ...state,
@@ -20,34 +28,40 @@ export default (state = initialState, action) => {
                 payload: action.payload,
                 payloadBackUp: action.payload
             };
+        // Data on Board
         case 'DATA_TEMPS':
             return {
                 ...state,
                 loading: false,
                 temperaments: action.temperaments
             };
+        // Data on Board
         case 'DATA_QUERY':
             return {
                 ...state,
                 loading: false,
                 payload: action.payload
             };
+        // Set loading
         case 'AWAIT_BYID':
             return {
                 ...state,
                 loading: true,
                 payload: action.payload
             };
+        // Data on Board
         case 'DATA_BYID':
             return {
                 ...state,
                 loading: false,
                 payload: action.payload
             };
+        // Data on Board
         case "POST_DOG" :
             return {
                 ...state,
             };
+        // Data on Board
         case 'SORT_BY' :
             if (action.payload === 'AZ' || action.payload === 'ZA') {
                 const filt = action.payload === 'AZ' ? state.payload.sort((a, b) => {
@@ -107,12 +121,16 @@ export default (state = initialState, action) => {
                     if (e.temperament !== undefined) {
                         return e.temperament.includes(action.payload)
                     }
+                    else {
+                        return dogs
+                    }
                 })
                 return {
                     ...state,
-                    payload: filtByTemp
+                    payload: filtByTemp[0] !== undefined ? filtByTemp : []
                 }
             };
+        // Default case
         default:
             return {
                 ...state

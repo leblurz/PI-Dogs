@@ -16,6 +16,7 @@ const {
     KEY
 } = process.env;
 
+// Axios to API
 const apiData = async () => {
     const api = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${KEY}`);
     const dataApi = await api.data.map ( e => {
@@ -24,7 +25,7 @@ const apiData = async () => {
             name: e.name,
             height: e.height.metric,
             weight: e.weight.metric,
-            temperament: e.temperament,
+            temperament: e.temperament !== undefined ? e.temperament : 'Lonely',
             // Traduccion al español
             life: e.life_span,
             image: e.image.url,
@@ -33,6 +34,7 @@ const apiData = async () => {
     return dataApi;
 };
 
+// Fetch to DB
 const dataDB = async () => {
     const pedido = await Breed.findAll({
         include: {
@@ -44,7 +46,6 @@ const dataDB = async () => {
         }
     });
     const filt = [];
-    const toString = '';
     pedido.forEach(e => {
         const unidos = e.temperaments.map(e=>e.dataValues.name)
         return filt.push({
@@ -60,6 +61,7 @@ const dataDB = async () => {
     return filt;
 };
 
+// All data
 const allData = async () => {
     const DB = await dataDB();
     const Api = await apiData();

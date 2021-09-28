@@ -13,7 +13,7 @@ const { dataDB, apiData } = require( '../requests/requests')
 router.get('/:id', async (req, res) => {
     const paras = req.params.id;
     try {
-        // Obteniendo data
+        // Obteniendo data si el largo del id es igual al generado por sequelize
         if (paras.length === 36) {
             const DB = await dataDB();
             const arrDB = DB.filter(e=>e.id === paras);
@@ -26,6 +26,7 @@ router.get('/:id', async (req, res) => {
         }
 
         else {
+            // Caso contrario
             const API = await apiData();
             const arrAPI = API.filter (e => e.id === paras);
             if (arrAPI.length > 0){
