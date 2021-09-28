@@ -2,7 +2,8 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getQueryName } from '../actions/index'
+import { getQueryName } from '../actions/index';
+import '../styles/seaBar.css';
 
 export default function SearchBar() {
     const dispatch = useDispatch();
@@ -21,11 +22,11 @@ export default function SearchBar() {
     };
     
     return (
-        <div>
-            <div >
-            <div><button className="bttsearch" type="submit" title="Buscar" onClick={(e)=>handleSubmit(e)}>SEARCH</button></div>
-            <div><input required className="barsearch" type="text" placeholder="Introduce una raza de perro" onChange={(b)=> handleInputChange(b)} /></div>
-        </div>
-        </div>
+            <>
+                <div className='containterInputs'>
+                    <input required className="barsearch" type="text" placeholder="Search Breed..." onChange={(b)=> handleInputChange(b)} />
+                    <button className="bttsearch" type="submit" title="Buscar" onClick={(e)=>handleSubmit(e)}>SEARCH</button>
+                </div>
+            </>
     );
 };

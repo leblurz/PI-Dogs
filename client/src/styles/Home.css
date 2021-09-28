@@ -1,0 +1,92 @@
+
+.dogo {
+    height: 550px;
+    width: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid black;
+    padding: 20px;
+    margin: 20px;
+    text-align: center;
+    justify-content: center;
+    border-radius: 5px;
+    background-color: #1E2022;
+    transition: all .7s;
+}
+
+.dogo:hover{
+    box-shadow: 0px 0px 20px black;
+}
+
+
+.dogo img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    transition: all .5s;
+}
+
+.dogoImage {
+    margin-bottom: 40px;
+    width: 300px;
+    height: 300px;
+}
+
+.dogoImage img:hover {
+    filter: grayscale(100%) brightness(60%);
+}
+
+.containerDogo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.dogo a {
+    font-size: 90%;
+    color: black;
+    text-decoration: none;
+    list-style: none;
+}
+
+.dogoText {
+    border: 1px solid black;
+    width: 300px;
+    height: 200px;
+    background-color: #F0F5F9;
+    border-radius: 10px;
+    transition: all .5s;
+}
+
+.dogo:hover .dogoText {
+    box-shadow: 0px 0px 30px white;
+}
+
+
+.loadingDog {
+    justify-items: center;
+    justify-content: center;
+    text-align: center;
+    display: block;
+}
+
+.loadingDog img {
+    padding: 30px;
+}
+
+.seaBar {
+    justify-content: start;
+    text-align: start;
+    justify-items: start;
+}
+
+.containSelect {
+    margin-left: 25px;
+}
+
+.selects {
+    font-size: 15px;
+    border-radius: 7px;
+}

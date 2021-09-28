@@ -1,0 +1,38 @@
+.containerConta {
+    justify-content: center;
+    text-align: center;
+    justify-items: center;
+}
+
+.containerDog {
+    justify-content: center;
+    text-align: center;
+    justify-items: center;
+    border: 10px solid black;
+    margin: 40px;
+    background-color: #1E2022;
+    border-radius: 10px;
+    transition: all .7s;
+}
+
+.containerDog:hover {
+    background-color: #F0F5F9;
+}
+
+.containerDog:hover .textDog {
+    color: #1E2022;
+}
+
+.imgDog {
+    padding: 50px;
+}
+
+.imgDog img {
+    border-radius: 10px;
+    max-width: 500px;
+}
+
+.textDog{
+    padding-bottom: 40px;
+    color: #F0F5F9;
+}

@@ -53,7 +53,7 @@ export default function Form (props) {
             weight : '',
             temperament : '',
             life : '',
-            Image :'',  
+            image :'',  
         })
         // Redirect
         props.history.push('/home')
@@ -100,43 +100,55 @@ export default function Form (props) {
     }
 
     return (
-        <div>
-            <form>
-                <label>Nombre: </label>
-                <input required type="text" value={dogo.name} name="name" onChange={e => handleChange(e)}/>
-
-                <input required type="number"
-                name="life" 
-                id="life" 
-                min="1" max="30" 
-                step="1" 
-                placeholder='Life...'
-                value={dogo.life}
-                onChange={e => handleChange(e)} 
-                />
-
+        <div className='contContainer'>
+            <form className='containerForm'>
+                <div>
+                    <label>Nombre: </label>
+                    <input required 
+                    className='placeHolder' 
+                    type="text" 
+                    value={dogo.name} 
+                    placeholder='Name...'
+                    name="name" 
+                    onChange={e => handleChange(e)}/>
+                </div>
+                <div>
+                    <input required type="number"
+                    name="life" 
+                    id="life" 
+                    min="1" max="30" 
+                    step="1"
+                    className='placeHolder'
+                    placeholder='Life...'
+                    value={dogo.life}
+                    onChange={e => handleChange(e)} 
+                    />
+                </div>
+                <div>
+                    <input required type="number" 
+                    name="heightMin" 
+                    id="heightMin"
+                    className='placeHolder'
+                    min="1" max="200" 
+                    step="1"
+                    value={dogo.height}
+                    placeholder='Height min(CM)...'
+                    onChange={e => handleChange(e)}
+                    />
+                    <input required type="number" 
+                    name="heightMax"
+                    className='placeHolder'
+                    id="heightMax" 
+                    min="1" max="200" 
+                    step="1"
+                    value={max.heightMax}
+                    placeholder='Height max(CM)...'
+                    onChange={e => handleChangeMax(e)}
+                    />
+                </div>
                 <input required type="number" 
-                name="heightMin" 
-                id="heightMin" 
-                min="1" max="200" 
-                step="1"
-                value={dogo.height}
-                placeholder='Height min(CM)...'
-                onChange={e => handleChange(e)}
-                />
-
-                <input required type="number" 
-                name="heightMax" 
-                id="heightMax" 
-                min="1" max="200" 
-                step="1"
-                value={max.heightMax}
-                placeholder='Height max(CM)...'
-                onChange={e => handleChangeMax(e)}
-                />
-
-                <input required type="number" 
-                name="weightMin" 
+                name="weightMin"
+                className='placeHolder'
                 id="weightMin" 
                 min="1" max="80" 
                 step="1"
@@ -146,7 +158,8 @@ export default function Form (props) {
                 />
 
                 <input required type="number" 
-                name="weightMax" 
+                name="weightMax"
+                className='placeHolder'
                 id="weightMax" 
                 min="1" max="200" 
                 step="1"
@@ -155,18 +168,27 @@ export default function Form (props) {
                 onChange={e => handleChangeMax(e)}
                 />
 
-                <label>Temperament/s: </label>
-                <input required type="text" value={dogo.temperament} name="temperament" onChange={e => handleChange(e)}/>
+                <div>
+                    <label>Temperament/s: </label>
+                    <input required type="text" 
+                    value={dogo.temperament} 
+                    name="temperament"
+                    className='placeHolder'
+                    placeholder='Temperaments...' 
+                    onChange={e => handleChange(e)}/>
+                </div>
 
                 <input type="text" 
                 value={dogo.image} 
-                name="image" 
+                name="image"
+                className='placeHolder'
                 onChange={e => handleChange(e)}
                 placeholder='URL Image...'
                 />
-
             </form>
-            <input type='submit' onClick={e=>handleSubmit(e)}/>
+            <div className='containerbtSub'>
+                <input className='btnSub' type='submit' onClick={e=>handleSubmit(e)}/>
+            </div>
         </div>
     );
     

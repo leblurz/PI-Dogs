@@ -42,13 +42,6 @@ export default function rootReducer (state = initialState, action) {
                 loading: false,
                 payload: action.payload
             };
-        // Set loading
-        case 'AWAIT_BYID':
-            return {
-                ...state,
-                loading: true,
-                payload: action.payload
-            };
         // Data on Board
         case 'DATA_BYID':
             return {

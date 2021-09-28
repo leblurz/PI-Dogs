@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Merienda&display=swap');
+
+.containterInputs {
+    justify-content: start;
+    text-align: start;
+    justify-items: start;
+}
+
+.bttsearch {
+    background-color: #1E2022;
+    color: #F0F5F9;
+    font-size: 15px;
+    font-family: 'Merienda', cursive;
+    padding: 0px 10px;
+    border-radius: 30px;
+    display: inline-block;
+}
+
+.barsearch {
+    display: inline-block;
+    font-size: 15px;
+    font-family: 'Merienda', cursive;
+    border-radius: 30px;
+    margin: 20px;
+    padding-left: 10px;
+}

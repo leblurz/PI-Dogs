@@ -1,27 +1,45 @@
-input {
-    padding: 10px 30px;
-    margin: 8px 0;
+.contContainer {
+    text-align: center;
+    justify-items: center;
+    justify-content: center;
+}
+
+.containerForm {
+    justify-content: start;
+    justify-items: start;
+    text-align: start;
+    border: 1px solid black;
+    background-color: #1E2022;
+    color: #F0F5F9;
     display: inline-block;
+    padding: 50px;
+    font-size: 30px;
+    transition: all .7s;
+}
 
-    width: 1px;
+.containerForm:hover {
+    background-color: #F0F5F9;
+    color:#1E2022;
+}
+
+.placeHolder {
     font-size: 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-
-    background-image: url('../images/485-4851736_free-png-search-icon-search-icon-free-download.png');
-    background-repeat: no-repeat;
-    background-position: 4px center;
-    background-size: 20px;
-
-    outline: none;
-
-    transition: all .5s;
+    margin: 10px;
+    width: 95%;
 }
 
-input:focus {
-    background-color: #d2e8fc;
-    width: 90%;    
+.btnSub {
+    margin-top: 10px;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 30px;
+    background-color: #1E2022;
+    color: #F0F5F9;
+    transition: all .9s;
 }
 
-
+.btnSub:hover {
+    background-color: #F0F5F9;
+    color: #1E2022;
+}
 

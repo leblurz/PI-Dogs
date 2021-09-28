@@ -1,3 +1,8 @@
+html {
+    font-family: 'Gluten', cursive;
+    font-family: 'Merienda', cursive;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -11,3 +16,42 @@ body {
     width: 100%;
     height: 100%;
 }
+
+.paginationBtn {
+    max-width: 80%;
+    padding: auto;
+    justify-items: center;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+}
+
+.paginated {
+    padding-bottom: 20px;
+    max-width: 60%;
+    margin: auto;
+    justify-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.paginationActive a {
+    background-color: #1E2022;
+    border-radius: 50%;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 8px;
+}
+
+li {
+    font-family: 'Montserrat', sans-serif;
+    color: black;
+    font-size: 25px;
+    display: inline-block;
+    padding: 20px 20px 0;
+    transition: color .5s;
+}
+
