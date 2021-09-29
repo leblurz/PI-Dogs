@@ -82,7 +82,7 @@ export default function Home (props) {
                     :
                     loading === true ?
                     <div className='loadingDog'> 
-                            <img src='https://reygif.com/media/1/pug-corriendo-10974.gif' alt='Running Dog' />
+                        <img src='https://reygif.com/media/1/pug-corriendo-10974.gif' alt='Running Dog' />
                     </div>
                     : 
                     <div>

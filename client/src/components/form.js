@@ -23,6 +23,7 @@ export default function Form (props) {
     // Submit
     function handleSubmit(e) {
         e.preventDefault();
+        console.log(err)
         // Error case
         if (err.name === '' || 
             err.heightMin === '' ||
@@ -33,17 +34,22 @@ export default function Form (props) {
             err.life === '') return (
                 alert('All fields whit * need to be completed')
             )
-        if (err.heightMin > err.heightMax) {
+        if (parseInt(err.heightMin)> parseInt(err.heightMax)) {
             return (
                 alert('Wrong height')
             )
         }
-        if (err.weightMin > err.weightMax) {
+        if (parseInt(err.weightMin) > parseInt(err.weightMax)) {
             return (
                 alert('Wrong weight')
             )
         }
-        if (err.life > 50 || err.life <= 0) {
+        if (parseInt(err.temperament)) {
+            return (
+                alert ('Temperaments shoul be be a string')
+            )
+        }
+        if (parseInt(err.life > 50) || parseInt(err.life) <= 0) {
             return (
                 alert('Is too old or young to die, dont you think?')
             );
@@ -118,7 +124,7 @@ export default function Form (props) {
         <div className='contContainer'>
             <form className='containerForm'>
                 <div>
-                    <label>Nombre: </label>
+                    <label>Name: </label>
                     <input required 
                     className='placeHolder' 
                     type="text" 

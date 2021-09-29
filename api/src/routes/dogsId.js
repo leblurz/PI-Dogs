@@ -21,7 +21,7 @@ router.get('/:id', async (req, res) => {
                 return res.status(200).json(arrDB);
             }
             else {
-                return res.status(400).send('Raza no encontrada');
+                return res.status(400).json('Search failures');
             };
         }
 
@@ -33,13 +33,13 @@ router.get('/:id', async (req, res) => {
                 return res.status(200).json(arrAPI);
             }
             else{
-                return res.status(400).send('Raza no encontrada');
+                return res.status(400).json('Search failures');
             };
         };
     }
     // Caso de error
     catch {
-        res.status(400).send('Hubieron conflictos al buscar la raza solicitada');
+        res.status(400).json('Search failures');
     };
 });
 

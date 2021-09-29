@@ -27,7 +27,7 @@ router.get('/', async (req, res) => {
             }
             else {
                 // Raza no encontrada
-                res.status(400).json('Raza no encontrada')
+                res.status(400).json('Breed not found')
             };
         }
         // Caso sin query
@@ -37,7 +37,7 @@ router.get('/', async (req, res) => {
     }
     // Caso de error
     catch{
-    res.status(400).json('Hubieron conflictos en la busqueda')
+    res.status(400).json('Search failures')
     };
 });
 
