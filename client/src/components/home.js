@@ -4,7 +4,7 @@ import '../styles/Home.css'
 import SearchBar from './SearchBar';
 
 // Action creators
-import { dataDogs, getDogs, getTemps, sortBy } from "../actions"
+import { getDogs, getTemps, sortBy } from "../actions"
 
 import { useDispatch, useSelector } from 'react-redux';
 

@@ -19,7 +19,7 @@ export default function Breed (prop) {
     useEffect(() => {
         dispatch(getById(idProp))
         //array de dependencia
-    }, [dispatch])
+    }, [dispatch, idProp])
 
     // State to dog and filt if the state are same or not
     const dog = useSelector( e => e,  _.isEqual)

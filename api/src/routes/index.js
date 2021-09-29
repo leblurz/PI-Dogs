@@ -29,8 +29,6 @@ const e = require('express');
 
 const router = Router();
 
-const { allData, dataDB, apiData } = require( '../requests/requests')
-
 router.use('/dogs', DogRouter);
 router.use('/dogs', DogsId);
 router.use('/dogs', DogsRouter);
