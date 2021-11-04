@@ -8,6 +8,19 @@
   <img height="200" src="./dog.png" />
 </p>
 
+# Dog app
+
+Generate an application for search dogs's breeds using dog api and add others functions to level up the final result.
+
+# Used technologies:
+   - [ ] Javascript
+   - [ ] React
+   - [ ] Redux
+   - [ ] Node
+   - [ ] Express
+   - [ ] CSS
+   - [ ] Sequelize - Postgres
+
 ## About me
 ```python
 <div
