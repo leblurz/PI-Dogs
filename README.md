@@ -17,6 +17,9 @@ Generate an application for search dogs's breeds using dog api and add others fu
 ### Landing page
 <img src="PiDogspng/landing.png"/>
 
+### Home
+<img src="PiDogspng/1.png" />
+
 # Used technologies:
    - [ ] Javascript
    - [ ] React
